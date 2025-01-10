@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [value, setvalue] = useState(0);
+  const count = useRef(0);
 
-  useEffect (() => {
-    setTimeout(() => {
-      setCount(count => count+1)
-      
-    }, 1000);
-
-  },[])
+  useEffect(()=> {
+    count.current = count.current + 1;
+  })
 
   return (
     <>
-   <h1>I have rendered {count} times..</h1>
+    <button onClick={()=>{setvalue(prev=>prev-1)}}>-1</button>
+    <h1>{value}</h1>
+    <button onClick={()=>{setvalue(prev=>prev+1)}}>+1</button>
+    <h1>Render Count: {count.current}</h1>
     </>     
   );
 }
