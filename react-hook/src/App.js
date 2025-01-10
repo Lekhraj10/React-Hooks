@@ -1,21 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useMemo } from "react";
 import { useState } from "react";
 import './App.css'
 
 function App() {
-  const [value, setvalue] = useState(0);
-  const count = useRef(0);
+  const [number, setNumber] = useState(0);
+  const [count, setCount] = useState(0);
 
-  useEffect(()=> {
-    count.current = count.current + 1;
-  })
+  function cubeNum(num) {
+    return Math.pow(num, 3)
+  }
+  
+const result = useMemo(()=>cubeNum(number), [number]);
 
   return (
     <>
-    <button onClick={()=>{setvalue(prev=>prev-1)}}>-1</button>
-    <h1>{value}</h1>
-    <button onClick={()=>{setvalue(prev=>prev+1)}}>+1</button>
-    <h1>Render Count: {count.current}</h1>
+    <input type="number" value={number} onChange={(e)=>{setNumber(e.target.value)}}/>
+    <h1>Cube of No: {result}</h1>
+    <button onClick={()=>{setCount(count+1)}}>Count ++</button>
+    <h1>Counter: {count}</h1>
+    
     </>     
   );
 }
